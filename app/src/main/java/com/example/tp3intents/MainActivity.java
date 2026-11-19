@@ -1,0 +1,43 @@
+package com.example.tp3intents;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText edtnom;
+    EditText edtprenom;
+    EditText edtmail;
+    Button envoyer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        edtnom = (EditText) findViewById(R.id.nom);
+        edtprenom = (EditText) findViewById(R.id.prenom);
+        edtmail = (EditText) findViewById(R.id.mail);
+        envoyer = (Button) findViewById(R.id.btnsend);
+
+        envoyer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getnom = edtnom.getText().toString();
+                String getprenom = edtprenom.getText().toString();
+                String getmail = edtmail.getText().toString();
+
+                Intent myintent = new Intent(MainActivity.this, WelcomeActivity.class);
+                myintent.putExtra("name", getnom);
+                myintent.putExtra("lastname", getprenom);
+                myintent.putExtra("mymail", getmail);
+                startActivity(myintent);
+            }
+        });
+    }
+}
